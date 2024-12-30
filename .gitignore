@@ -1,0 +1,25 @@
+# Dependências do Node
+/node_modules
+
+# Arquivos de build do TypeScript
+/dist
+/build
+
+# Arquivos de configuração de IDE
+/.vscode
+.idea
+
+# Arquivos de logs
+*.log
+
+# Arquivos de ambiente
+.env
+
+# Arquivos temporários
+*.tsbuildinfo
+
+# Cache do npm
+.npm
+
+# Stripe e outras credenciais sensíveis (não versionar arquivos com chaves de API!)
+/src/utils/stripe.ts

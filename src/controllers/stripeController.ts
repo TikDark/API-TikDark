@@ -1,15 +1,16 @@
-// src/controllers/stripeController.ts
 import { Request, Response } from 'express';
 import { stripe } from '../utils/stripe';  // Importa a instância do Stripe
 
 export const createCheckoutSession = async (req: Request, res: Response) => {
-  // Acessa corretamente a propriedade `total` do corpo da requisição
   const { total } = req.body;
 
   // Verifica se o valor de total é válido
   if (!total || total <= 0) {
     return res.status(400).json({ error: 'Invalid total value' });
   }
+
+  // Convertendo para centavos e garantindo que o valor seja um número inteiro
+  const totalInCents = Math.round(total * 100); // Multiplica por 100 e arredonda para centavos
 
   try {
     // Cria a sessão de checkout no Stripe
@@ -22,7 +23,7 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
             product_data: {
               name: 'Total Payment',
             },
-            unit_amount: total * 100,  // Convertendo para centavos
+            unit_amount: totalInCents,  // Usando o valor em centavos
           },
           quantity: 1,
         },
@@ -32,8 +33,8 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
       cancel_url: `${process.env.CANCEL_URL}`,
     });
 
-    // Retorna a URL da sessão criada
-    res.json({ url: session.url });
+    // Retorna o sessionId para o frontend
+    res.json({ id: session.id });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to create payment intent' });
