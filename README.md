@@ -8,7 +8,7 @@ API para automação de pagamento e cálculo de valores, integrada ao Stripe par
 A rota `/api/calculate` permite calcular o valor total com base nas métricas fornecidas (Likes, Views, Shares, Saves e Vídeos).
 
 - **Método**: `POST`
-- **URL**: `http://<url>/api/calculate`
+- **URL**: `https://api-tik-dark.vercel.app/api/calculate`
 - **Corpo da Requisição** (JSON):
   ```json
   {
@@ -42,7 +42,7 @@ A rota `/api/calculate` permite calcular o valor total com base nas métricas fo
 A rota `/api/checkout` é responsável por iniciar o processo de pagamento com Stripe, redirecionando o usuário para a página de checkout.
 
 - **Método**: `POST`
-- **URL**: `http://<url>/api/checkout`
+- **URL**: `https://api-tik-dark.vercel.app/api/checkout`
 - **Corpo da Requisição** (JSON):
   ```json
   {
@@ -68,7 +68,7 @@ Você pode usar o **Invoke-WebRequest** para testar as rotas no PowerShell.
 ### 1. **Cálculo de Valores**
 
 ```powershell
-Invoke-WebRequest -Uri http://<url>/api/calculate -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"likes":150,"views":2000,"shares":100,"saves":300,"videos":1}'
+Invoke-WebRequest -Uri https://api-tik-dark.vercel.app/api/calculate -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"likes":150,"views":2000,"shares":100,"saves":300,"videos":1}'
 ```
 
 **Resposta Esperada**:
@@ -81,7 +81,7 @@ Invoke-WebRequest -Uri http://<url>/api/calculate -Method POST -Headers @{"Conte
 ### 2. **Checkout**
 
 ```powershell
-Invoke-WebRequest -Uri http://<url>/api/checkout -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"total":954}'
+Invoke-WebRequest -Uri https://api-tik-dark.vercel.app/api/checkout -Method POST -Headers @{"Content-Type"="application/json"} -Body '{"total":954}'
 ```
 
 **Resposta Esperada**:
@@ -110,7 +110,7 @@ Invoke-WebRequest -Uri http://<url>/api/checkout -Method POST -Headers @{"Conten
    npm run dev
    ```
 
-4. A API estará disponível em `http://<url>`.
+4. A API estará disponível em `http://localhost:3000`.
 
 ---
 
