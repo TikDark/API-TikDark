@@ -47,7 +47,7 @@ API-TikDark/
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/usuario/API-TikDark.git
+   git clone https://github.com/TikDark/API-TikDark.git
    cd API-TikDark
    ```
 
@@ -112,7 +112,7 @@ API-TikDark/
 Use o comando abaixo no PowerShell para testar a rota:
 
 ```powershell
-Invoke-WebRequest -Uri "http://localhost:3000/api/checkout" `
+Invoke-WebRequest -Uri "https://api-tik-dark.vercel.app/api/checkout" `
   -Method POST `
   -Body (@{
       videoLink = "https://example.com/video";
