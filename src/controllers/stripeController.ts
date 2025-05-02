@@ -5,7 +5,7 @@ import { Checkout } from '../models/Checkout';
 export const createCheckoutSession = async (req: Request, res: Response) => {
   const { videoLink, likes, views, shares, saves, total } = req.body;
 
-  // Verificação dos parâmetros recebidos
+  
   if (!videoLink || typeof videoLink !== 'string') {
     return res.status(400).json({ error: 'Invalid or missing videoLink' });
   }
@@ -18,15 +18,14 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
     return res.status(400).json({ error: 'Invalid total value' });
   }
 
-  // Convertendo o valor total para centavos
+
   const totalInCents = Math.round(total * 100);
 
   try {
-    // Salva os dados no MongoDB
+  
     const checkout = new Checkout({ videoLink, likes, views, shares, saves, total });
     await checkout.save();
 
-    // Cria a sessão de checkout no Stripe
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
@@ -47,7 +46,6 @@ export const createCheckoutSession = async (req: Request, res: Response) => {
       cancel_url: `${process.env.CANCEL_URL}`,
     });
 
-    // Retorna o sessionId para o frontend
     res.json({ id: session.id });
   } catch (error) {
     console.error(error);
