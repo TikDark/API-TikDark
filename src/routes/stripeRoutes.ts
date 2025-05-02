@@ -1,11 +1,10 @@
 import { Router, Request, Response } from 'express';
-import { createCheckoutSession } from '../controllers/stripeController';  // Importando o controlador
+import { createCheckoutSession } from '../controllers/stripeController';  
 
-const stripeRouter = Router();  // Inicializa o Router
+const stripeRouter = Router();  
 
-// Definindo a rota para o checkout e chamando a função do controlador diretamente
 stripeRouter.post('/checkout', (req: Request, res: Response) => {
-  createCheckoutSession(req, res);  // Chama a função de controle
+  createCheckoutSession(req, res);  
 });
 
 export { stripeRouter };
